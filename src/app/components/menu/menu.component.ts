@@ -1,5 +1,5 @@
-import { NgClass, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NgIf, NgClass } from '@angular/common';
 import { PainelNotificacaoComponent } from '../painel-notificacao/painel-notificacao.component';
 
 @Component({
@@ -17,22 +17,23 @@ export class MenuComponent {
   notifications = [
     {
       avatar: '/assets/avatar.jpg',
-      nome: 'Andre Estevão',
-      texto: 'publicou uma atualização: As bases no vocabulário para TODAS as produções científicas (PDF).',
+      nome: 'Antonio',
+      texto: `postou uma atualização em Avisos e novidades para todos! <br>
+        <span class="font-semibold"> Alerta: Edital de Cultura 2025, com oportunidade para projetos interessantes.</span>`,
       data: 'agora mesmo',
       visto: false
     },
     {
       avatar: '/assets/avatar.jpg',
-      nome: 'Tiago Cardone',
-      texto: 'curtiu seu novo post em Aprendizado de Máquina.',
+      nome: 'Antonio',
+      texto: `curtiu o novo conteúdo em Inteligência Artificial e Machine Learning (S522...252).`,
       data: 'há 5 min',
       visto: false
     },
     {
       avatar: '/assets/avatar.jpg',
-      nome: 'Jornalismo e Mídia Sociais',
-      texto: 'atualizou um documento em Machine Learning (EEE).',
+      nome: 'Antonio',
+      texto: `Oportunidade: Possível potencial cliente com problemas de Infraestrutura.`,
       data: 'há 2h',
       visto: true
     }

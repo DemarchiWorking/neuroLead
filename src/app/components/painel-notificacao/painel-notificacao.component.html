@@ -1,34 +1,49 @@
-<div class="fixed inset-0 z-50 flex justify-end">
-  <!-- Backdrop: ao clicar fecha -->
-  <div class="fixed inset-0 bg-black bg-opacity-30 transition-opacity" (click)="close.emit()"></div>
-  <!-- Drawer -->
-  <aside class="notificacao-drawer fixed right-0 top-0 h-full bg-white shadow-2xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md transition-all duration-300 flex flex-col"
-         style="width: 100vw; max-width: 400px;">
-    <div class="flex items-center justify-between px-6 py-4 border-b">
+<!-- Sobreposição de fundo ESCURECIDA só no mobile -->
+<div class="fixed inset-0 z-50 sm:hidden bg-black/20" (click)="close.emit()"></div>
+<!-- Painel de notificações -->
+<div
+  class="
+    painel-notificacao-popover 
+    fixed 
+    sm:absolute 
+    right-2 sm:right-0
+    top-0 sm:top-[52px] 
+    w-full sm:w-[370px] 
+    max-w-full sm:max-w-[370px]
+    bg-white shadow-2xl border border-gray-200
+    rounded-none sm:rounded-xl
+    z-50 flex flex-col
+    max-h-[98vh] sm:max-h-[75vh]
+    transition-all
+  "
+  style="margin-top:16px;" 
+  (click)="handlePanelClick($event)"
+>
+  <div class="flex items-center justify-between px-4 sm:px-6 py-4 border-b">
+    <div class="flex-1 flex items-center">
       <h2 class="text-lg font-semibold">Notificações</h2>
-      <button (click)="close.emit()" class="p-1 rounded-md hover:bg-gray-100">
-        <svg class="h-5 w-5 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
     </div>
-    <!-- Lista de Notificações -->
-    <div class="flex-1 overflow-y-auto custom-scrollbar">
-      <ul class="divide-y divide-gray-100">
-        <li *ngFor="let n of notifications" class="flex items-start px-6 py-4 hover:bg-gray-50 transition">
-          <img [src]="n.avatar" alt="{{n.nome}}" class="w-12 h-12 rounded-full border mr-4 object-cover"/>
-          <div class="flex-1">
-            <div class="font-semibold text-sm mb-0.5 text-gray-900">{{ n.nome }}</div>
-            <div class="text-sm text-gray-800">{{ n.texto }}</div>
-            <div class="text-xs text-gray-400 mt-1">{{ n.data }}</div>
-          </div>
-          <span *ngIf="!n.visto" class="ml-2 mt-3 block w-2 h-2 bg-blue-600 rounded-full"></span>
-        </li>
-      </ul>
-    </div>
-    <div class="border-t p-4 flex justify-between items-center">
-      <button class="text-sm text-slate-500 hover:underline">Marcar tudo como lido</button>
-      <button class="text-sm text-blue-700 hover:underline font-medium">Visualizar todas</button>
-    </div>
-  </aside>
+    <button (click)="close.emit()" class="p-1 rounded-md hover:bg-gray-100">
+      <svg class="h-5 w-5 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto custom-scrollbar max-h-[65vh]">
+    <ul class="divide-y divide-gray-100">
+      <li *ngFor="let n of notifications" class="flex items-start px-4 sm:px-6 py-4 hover:bg-gray-50 transition text-sm sm:text-base">
+        <img [src]="n.avatar" alt="{{n.nome}}" class="w-10 h-10 rounded-full border mr-4 object-cover"/>
+        <div class="flex-1 leading-snug">
+          <span class="font-bold mr-1 text-gray-900">{{ n.nome }}</span>
+          <span [innerHTML]="n.texto"></span>
+          <div class="text-xs text-gray-400 mt-1">{{ n.data }}</div>
+        </div>
+        <span *ngIf="!n.visto" class="ml-2 mt-2 block w-2 h-2 bg-blue-600 rounded-full"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="border-t p-4 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
+    <button class="text-sm text-slate-500 hover:underline whitespace-nowrap">Marcar tudo como lido</button>
+    <button class="text-sm text-blue-700 hover:underline font-medium whitespace-nowrap">Visualizar todas</button>
+  </div>
 </div>

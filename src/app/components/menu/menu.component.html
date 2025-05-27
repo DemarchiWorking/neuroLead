@@ -1,9 +1,8 @@
 <nav class="w-full bg-white shadow-md fixed top-0 z-50">
-  <!-- Container -->
-  <div class="w-full md:max-w-7xl md:mx-auto px-4 flex items-center h-16 justify-between">
-    <!-- Esquerda: Hamburger, logo e nome -->
+  <!-- Header -->
+  <div class="w-full md:max-w-7xl md:mx-auto px-4 flex items-center h-16 justify-between relative">
+    <!-- Esquerda -->
     <div class="flex items-center flex-shrink-0">
-      <!-- Hamburger: Mobile Only -->
       <button class="mr-2 p-2 -ml-2 md:hidden" aria-label="Menu" (click)="openMenu()">
         <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2"
              viewBox="0 0 24 24">
@@ -13,17 +12,15 @@
       <img src="/icone.png" alt="Logo NeuroLeadd" class="h-8 w-auto" />
       <span class="hidden md:inline ml-3 font-bold text-base text-gray-900 select-none">NeuroLead</span>
     </div>
-
-    <!-- Centro: Menu desktop -->
+    <!-- Centro desktop -->
     <ul class="hidden md:flex space-x-6 text-gray-800 text-[15px] font-medium">
       <li><a href="#">Dashboards</a></li>
       <li><a href="#">Dados</a></li>
-      <li><a href="#">Trilhas</a></li>
+      <li><a href="#">Análise</a></li>
       <li><a href="#">Login</a></li>
     </ul>
-
-    <!-- Direita: ícones + perfil -->
-    <div class="flex items-center space-x-3">
+    <!-- Direita (sino e avatar) -->
+    <div class="flex items-center space-x-3 relative">
       <button aria-label="Buscar" class="p-2">
         <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" stroke-width="2"
              viewBox="0 0 24 24">
@@ -36,11 +33,15 @@
           <path d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8-1.342 0-2.642-.262-3.819-.736L3 20l.757-3.029C3.273 15.03 3 13.974 3 12.986 3 8.565 7.03 5 12 5c4.97 0 9 3.565 9 8z"/>
         </svg>
       </button>
-      <!-- Notificações -->
-      <button aria-label="Notificações" class="relative p-2" (click)="toggleNotificationPanel()">
+      <!-- Notificação: ANCORADO, um pouco abaixo do sino no desktop-->
+      <button
+        aria-label="Notificações"
+        class="relative p-2"
+        (click)="toggleNotificationPanel()">
         <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" stroke-width="2"
           viewBox="0 0 24 24">
-          <path d="M15 17h5l-1.405-1.405C17.79 15.212 18 14.656 18 14V11c0-3.07-2.053-5.64-5-6.32V4a2 2 0 10-4 0v.68C7.053 5.36 5 7.93 5 11v3c0 .656.21 1.212.595 1.595L4 17h5"/>
+          <path
+            d="M15 17h5l-1.405-1.405C17.79 15.212 18 14.656 18 14V11c0-3.07-2.053-5.64-5-6.32V4a2 2 0 10-4 0v.68C7.053 5.36 5 7.93 5 11v3c0 .656.21 1.212.595 1.595L4 17h5"/>
         </svg>
         <span *ngIf="notificationCount > 0"
           class="absolute -top-1 -right-1 bg-blue-900 text-white rounded-full text-xs min-w-[18px] h-5 flex items-center justify-center px-1">
@@ -49,9 +50,15 @@
       </button>
       <img src="/assets/avatar.jpg" alt="Perfil do usuário"
         class="w-8 h-8 rounded-full border-2 border-blue-50 object-cover" />
+      <!-- Painel Notificação -->
+      <app-painel-notificacao
+        *ngIf="notificationPanelOpen"
+        class="z-[60]"
+        [notifications]="notifications"
+        (close)="closeNotificationPanel()">
+      </app-painel-notificacao>
     </div>
   </div>
-
   <!-- Drawer menu (Mobile only) -->
   <div class="fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity duration-200 md:hidden"
     *ngIf="menuOpen"
@@ -74,11 +81,4 @@
       <li><a href="#" (click)="closeMenu()">Login</a></li>
     </ul>
   </aside>
-
-  <!-- Painel de Notificações -->
-  <app-painel-notificacao
-    *ngIf="notificationPanelOpen"
-    [notifications]="notifications"
-    (close)="closeNotificationPanel()">
-  </app-painel-notificacao>
 </nav>
