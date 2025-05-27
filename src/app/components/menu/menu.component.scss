@@ -1,0 +1,5 @@
+/* Scroll custom para painel */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #e4e8f0; border-radius: 4px; }
+/* Exemplo: */
+nav { z-index: 100; }

@@ -1,0 +1,12 @@
+.notificacao-drawer {
+  /* Garantir que o painel não receba click-through para o fundo */
+  z-index: 60;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
+}
