@@ -19,5 +19,12 @@ export class LeadService {
   getLeads(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+  atualizarLead(lead: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${lead.token || lead.leadId || lead.id}`, lead);
+  }
+  excluirLead(id: string): Observable<any> {
+    alert(`Excluindo lead com ID: ${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
 }
 

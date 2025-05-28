@@ -1,92 +1,126 @@
+<div class="max-w-6xl mx-auto w-full">
+  <h2 class="text-xl sm:text-2xl font-semibold mb-6 text-gray-900">
+    Target para treinamento do Neurônio Comercial
+  </h2>
+  <!-- Filtros NAV -->
+  <nav class="flex flex-wrap gap-y-2 gap-x-3 border-b border-gray-200 mb-10"></nav>
 
- <div class="max-w-6xl mx-auto w-full">
-    <h2 class="text-xl sm:text-2xl font-semibold mb-6 text-gray-900">
-      Target para treinamento do Neurônio Comercial
-    </h2>
-    <!-- FILTROS NAV -->
-    <nav class="flex flex-wrap gap-y-2 gap-x-3 border-b border-gray-200 mb-10">
-   
-    </nav>
-
-       <div class="flex flex-row flex-wrap gap-0.5 bg-white rounded-lg shadow border border-gray-100 overflow-x-auto">
-        <button
-          *ngFor="let f of filtros; let i = index"
-          class="px-6 py-2 text-sm font-medium rounded-lg focus:outline-none transition-all
-                text-gray-700 hover:bg-blue-50 hover:text-blue-800
-                border-0 border-b-2"
-          [ngClass]="{
-              'bg-blue-700 text-white shadow hover:text-white': f.ativo,
-              'border-blue-700 border-b-2': f.ativo,
-              'border-transparent': !f.ativo
-            }"
-          style="min-width:140px"
-        >
-          {{ f.nome }}
-        </button>
-      </div>
-
-
-<div class="bg-white rounded-2xl border border-gray-200 max-w-3xl mx-auto shadow-sm mb-12 min-h-[260px] flex flex-col justify-between">
-  <div class="px-7 pt-7 pb-4 relative" style="min-height: 170px;">
-    <!-- Paginação visual do stepper -->
-    <div class="flex items-center mb-6">
-      <ng-container *ngFor="let step of [0,1,2]; let i = index;">
-        <div class="w-8 h-1 rounded-full mr-2"
-          [ngClass]="{
-            'bg-blue-700': i <= stepAtual,
-            'bg-blue-200': i > stepAtual
-          }"></div>
-      </ng-container>
-    </div>
-
-    
-    <!-- Transição entre etapas -->
-    <ng-container [@formStep]>
-      <!-- Step 1 -->
-      <ng-container *ngIf="stepAtual === 0">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-[17px] font-semibold text-gray-900">Apontar</span>
-          <button (click)="avancar()" class="py-1.5 px-5 rounded-md border border-gray-300 text-blue-700 font-medium text-sm hover:bg-blue-50 transition">Prox</button>
-        </div>
-        <form (ngSubmit)="aoSalvar()" autocomplete="off">
-          <input class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-800 w-full"
-            [(ngModel)]="nomeApontado" name="nomeApontado" placeholder="Digite o nome que deseja apontar"/>
-        </form>
-      </ng-container>
-
-      <!-- Step 2 -->
-      <ng-container *ngIf="stepAtual === 1">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-[17px] font-semibold text-gray-900">Informações do Cliente</span>
-          <button (click)="avancar()" class="py-1.5 px-5 rounded-md border border-gray-300 text-blue-700 font-medium text-sm hover:bg-blue-50 transition">Prox</button>
-        </div>
-        <form class="grid grid-cols-1 gap-3 mt-3" (ngSubmit)="avancar()" autocomplete="off">
-          <input class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-800"
-            [(ngModel)]="funcionarios" name="funcionarios" placeholder="Qtde de funcionários"/>
-          <input class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-800"
-            [(ngModel)]="faturamento" name="faturamento" placeholder="Faturamento anual (R$)"/>
-          <div class="flex gap-3">
-            <button type="button" (click)="voltar()" class="px-5 py-2 text-gray-600 font-medium rounded bg-gray-100 hover:bg-gray-200 transition">Voltar</button>
-            <button type="submit" class="bg-blue-700 text-white rounded px-5 py-2 ml-auto font-semibold hover:bg-blue-800 transition">Prox</button>
-          </div>
-        </form>
-      </ng-container>
-
-      <!-- Step 3 -->
-      <ng-container *ngIf="stepAtual === 2">
-        <div class="flex items-center justify-between mb-3">
-          <span class="text-[17px] font-semibold text-gray-900">Confirmar Dados</span>
-          <button (click)="voltar()" class="py-1.5 px-5 rounded-md border border-gray-300 text-blue-700 font-medium text-sm hover:bg-blue-50 transition">Voltar</button>
-        </div>
-        <div class="py-2 text-[15px] leading-relaxed">
-          <div><b>Apontado:</b> {{ nomeApontado }}</div>
-          <div><b>Funcionários:</b> {{ funcionarios }}</div>
-          <div><b>Faturamento:</b> {{ faturamento }}</div>
-        </div>
-        <button (click)="aoFinalizar()" class="bg-green-600 text-white rounded px-5 py-2 mt-5 ml-auto font-semibold hover:bg-green-700 transition">Finalizar</button>
-      </ng-container>
-    </ng-container>
+  <div class="flex flex-row flex-wrap gap-0.5 bg-white rounded-lg shadow border border-gray-100 overflow-x-auto">
+    <button
+      *ngFor="let f of filtros; let i = index"
+      class="px-6 py-2 text-sm font-medium rounded-lg focus:outline-none transition-all
+            text-gray-700 hover:bg-blue-50 hover:text-blue-800 border-0 border-b-2"
+      [ngClass]="{
+          'bg-blue-700 text-white shadow hover:text-white': f.ativo,
+          'border-blue-700 border-b-2': f.ativo,
+          'border-transparent': !f.ativo
+        }"
+      style="min-width:140px"
+    >
+      {{ f.nome }}
+    </button>
   </div>
-</div>
 
-</div>
+  <div class="bg-white rounded-2xl border border-gray-200 max-w-3xl mx-auto shadow-sm mb-12 min-h-[260px] flex flex-col justify-between">
+    <div class="px-7 pt-7 pb-4 relative" style="min-height: 170px;">
+      <!-- Paginação visual do stepper -->
+      <div class="flex items-center mb-6">
+        <ng-container *ngFor="let step of [0,1,2]; let i = index;">
+          <div class="w-8 h-1 rounded-full mr-2"
+            [ngClass]="{
+              'bg-blue-700': i <= stepAtual,
+              'bg-blue-200': i > stepAtual
+            }"></div>
+        </ng-container>
+      </div>
+      <ng-container [@formStep]>
+    <!-- Step 1 -->
+<ng-container *ngIf="stepAtual === 0">
+  <div class="flex items-center justify-between mb-3">
+    <span class="text-[17px] font-semibold text-gray-900">Apontar</span>
+    <button (click)="avancar()"
+      class="py-1.5 px-5 rounded-md border border-gray-300 text-blue-700 font-medium text-sm hover:bg-blue-50 transition">Prox</button>
+  </div>
+  <form (ngSubmit)="aoSalvar()" autocomplete="off">
+    <input class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-800 w-full"
+      [(ngModel)]="nomeApontado" name="nomeApontado" placeholder="Digite o nome que deseja apontar"/>
+  </form>
+  <!-- Checkbox Tailwind -->
+  <div class="flex items-center mt-3">
+    <input
+      id="neuronio"
+      type="checkbox"
+      class="form-checkbox h-5 w-5 text-blue-600 mr-3 rounded focus:ring-blue-600"
+      [(ngModel)]="usarNeuronioArtificial"
+      name="usarNeuronioArtificial"
+    />
+    <label for="neuronio" class="text-sm text-gray-700">
+      Usar Neurônio Artificial
+    </label>
+  </div>
+</ng-container>
+
+<!-- Step 2 -->
+<ng-container *ngIf="stepAtual === 1">
+  <div *ngIf="nomeSalvoStep1" class="mb-2 py-2 px-4 bg-blue-50 border border-blue-200 text-blue-900 rounded text-sm font-medium">
+    Apontado: <span class="font-semibold">{{ nomeSalvoStep1 }}</span>
+  </div>
+  <div class="flex items-center justify-between mb-3">
+    <span class="text-[17px] font-semibold text-gray-900">Informações da Empresa</span>
+    <button (click)="avancar()" class="py-1.5 px-5 rounded-md border border-gray-300 text-blue-700 font-medium text-sm hover:bg-blue-50 transition">Prox</button>
+  </div>
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3" (ngSubmit)="avancar()" autocomplete="off">
+    <input class="border rounded px-3 py-2 w-full" placeholder="Foto (url)" [(ngModel)]="foto" name="foto"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Nome" [(ngModel)]="nome" name="nome"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Funcionários" [(ngModel)]="funcionarios" name="funcionarios"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Setor" [(ngModel)]="setor" name="setor"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Porte" [(ngModel)]="porte" name="porte"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Lucro" [(ngModel)]="lucro" name="lucro"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Avaliação" [(ngModel)]="avaliacao" name="avaliacao"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Score" [(ngModel)]="score" name="score"/>
+    <select class="border rounded px-3 py-2 w-full" [(ngModel)]="multinacional" name="multinacional">
+      <option value="Sim">Multinacional: Sim</option>
+      <option value="Não">Multinacional: Não</option>
+    </select>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Faturamento anual" [(ngModel)]="faturamento" name="faturamento"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Idade" [(ngModel)]="idade" name="idade"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Quantidade de filiais" [(ngModel)]="quantidadeFiliais" name="quantidadeFiliais"/>
+    <input class="border rounded px-3 py-2 w-full" placeholder="Matriz" [(ngModel)]="matriz" name="matriz"/>
+    <div class="col-span-2 flex gap-3">
+      <button type="button" (click)="voltar()" class="px-5 py-2 text-gray-600 font-medium rounded bg-gray-100 hover:bg-gray-200 transition">Voltar</button>
+      <button type="submit" class="bg-blue-700 text-white rounded px-5 py-2 ml-auto font-semibold hover:bg-blue-800 transition">Prox</button>
+    </div>
+  </form>
+</ng-container>
+
+<!-- Step 3 -->
+<ng-container *ngIf="stepAtual === 2">
+  <div class="flex items-center justify-between mb-3">
+    <span class="text-[17px] font-semibold text-gray-900">Confirmar Dados</span>
+    <button (click)="voltar()" class="py-1.5 px-5 rounded-md border border-gray-300 text-blue-700 font-medium text-sm hover:bg-blue-50 transition">Voltar</button>
+  </div>
+  <div class="py-2 text-[15px] leading-relaxed grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-2">
+    <div><b>Foto:</b> {{ camposNormalizados.foto }}</div>
+    <div><b>Nome:</b> {{ camposNormalizados.nome }}</div>
+    <div><b>Funcionários:</b> {{ camposNormalizados.funcionarios }}</div>
+    <div><b>Setor:</b> {{ camposNormalizados.setor }}</div>
+    <div><b>Porte:</b> {{ camposNormalizados.porte }}</div>
+    <div><b>Lucro:</b> {{ camposNormalizados.lucro }}</div>
+    <div><b>Avaliação:</b> {{ camposNormalizados.avaliacao }}</div>
+    <div><b>Score:</b> {{ camposNormalizados.score }}</div>
+    <div><b>Multinacional:</b> {{ camposNormalizados.multinacional }}</div>
+    <div><b>Faturamento anual:</b> {{ camposNormalizados.faturamento }}</div>
+    <div><b>Idade:</b> {{ camposNormalizados.idade }}</div>
+    <div><b>Quantidade de filiais:</b> {{ camposNormalizados.quantidadeFiliais }}</div>
+    <div><b>Matriz:</b> {{ camposNormalizados.matriz }}</div>
+  </div>
+  <button
+    (click)="aoFinalizar()"
+    [disabled]="enviando"
+    class="bg-green-600 text-white rounded px-5 py-2 mt-5 ml-auto font-semibold hover:bg-green-700 transition disabled:opacity-50">
+    {{ enviando ? 'Enviando...' : 'Finalizar' }}
+  </button>
+  <!-- Feedback do envio -->
+  <div *ngIf="envioSucesso" class="mt-4 text-green-600 font-medium">Lead inserido no DynamoDB com sucesso!</div>
+  <div *ngIf="envioErro" class="mt-4 text-red-600 font-medium">{{ envioErro }}</div>
+</ng-container>

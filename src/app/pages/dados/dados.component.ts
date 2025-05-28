@@ -4,9 +4,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LeadService } from '../../services/lead.service';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common'; //NgFor, NgIf
 import { FormsModule, NgModel } from '@angular/forms';
-
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartData, ChartOptions } from 'chart.js'; // ADICIONE
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
@@ -15,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-dados',
-  imports: [HttpClientModule, NgIf, FormsModule, CommonModule],
+  imports: [HttpClientModule, FormsModule, CommonModule, BaseChartDirective], // INCLUA NgChartsModule aqui
   standalone: true,
   templateUrl: './dados.component.html',
   styleUrl: './dados.component.scss'
@@ -23,7 +24,8 @@ import { v4 as uuidv4 } from 'uuid';
 export class DadosComponent {
 // Troque a URL abaixo se seu Node estiver em outro endereço/porta ou hostname
   private apiUrl = 'http://localhost:3001/api/leads';
-
+ modalAberto = false;
+  leadSelecionado: any = {};
   constructor(private http: HttpClient,private leadService: LeadService) {}
   leads: any[] = [];
   carregando = true;
@@ -42,7 +44,20 @@ export class DadosComponent {
     this.buscarLeads();
   }
 
-
+public barChartData: ChartData<'bar'> = { labels: [], datasets: [] };
+  public barChartOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top'
+      },
+      title: {
+        display: true,
+        text: 'Comparativo Empresas'
+      }
+    }
+  };
   getLeads(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
@@ -52,6 +67,8 @@ export class DadosComponent {
       next: (dados) => {
         this.carregando = false;
         this.leads = dados;
+        this.montarGrafico(); 
+
       },
       error: (err) => {
         this.carregando = false;
@@ -79,5 +96,65 @@ export class DadosComponent {
       },
     });
   }
-}
+  montarGrafico() {
+    this.barChartData = {
+      labels: this.leads.map(lead => lead.nome || lead.Nome || lead.leadId || '—'),
+      datasets: [
+        {
+          data: this.leads.map(lead => Number(lead.score ?? 0)),
+          label: 'Score'
+        },
+        {
+          data: this.leads.map(lead => Number(lead.avaliacao ?? 0)),
+          label: 'Avaliação'
+        },
+        {
+          data: this.leads.map(lead => Number(lead.funcionarios ?? 0)),
+          label: 'Funcionários'
+        },
+        {
+          data: this.leads.map(lead => Number(lead.faturamento ?? lead.faturamento_anual ?? 0)),
+          label: 'Faturamento (R$)'
+        }
+      ]
+    };
+  }
+   abrirModalEditar(lead: any) {
+    this.leadSelecionado = { ...lead }; // Cópia para edição sem mexer no original
+    this.modalAberto = true;
+  }
 
+  fecharModal() {
+    this.modalAberto = false;
+    this.leadSelecionado = {};
+  }
+
+  salvarEdicao() {
+    // Salve as alterações, por ex, via serviço:
+    this.leadService.atualizarLead(this.leadSelecionado).subscribe({
+      next: () => {
+        this.sucesso = 'Lead atualizado!';
+        this.buscarLeads();
+        this.fecharModal();
+      },
+      error: () => {
+        this.erro = 'Erro ao atualizar lead!';
+      }
+    });
+  }
+
+  excluirLead(lead: any) {
+    if (confirm('Tem certeza que deseja apagar este lead?')) {
+      this.leadService.excluirLead(lead.leadId) //|| lead.id, lead.token ||) // use o campo-único que identifica o lead
+        .subscribe({
+          next: () => {
+            this.sucesso = 'Lead removido!';
+            this.buscarLeads();
+          },
+          error: () => {
+            this.erro = 'Erro ao remover lead!';
+          }
+        });
+    }
+  }
+}
