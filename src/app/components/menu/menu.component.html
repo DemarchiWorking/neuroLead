@@ -15,7 +15,7 @@
     <!-- Centro desktop -->
     <ul class="hidden md:flex space-x-6 text-gray-800 text-[15px] font-medium">
       <li><a href="#">Dashboards</a></li>
-      <li><a href="#">Dados</a></li>
+      <li><a href="/dados">Dadoss</a></li>
       <li><a href="#">Análise</a></li>
       <li><a href="#">Login</a></li>
     </ul>
@@ -48,7 +48,7 @@
           {{notificationCount}}
         </span>
       </button>
-      <img src="/assets/avatar.jpg" alt="Perfil do usuário"
+      <img src="/robo-cop.png" alt="Perfil do usuário"
         class="w-8 h-8 rounded-full border-2 border-blue-50 object-cover" />
       <!-- Painel Notificação -->
       <app-painel-notificacao
@@ -67,7 +67,7 @@
     class="fixed top-0 left-0 w-64 h-full bg-white z-50 shadow-lg transform transition-transform duration-300 md:hidden"
     [ngClass]="{'-translate-x-full': !menuOpen, 'translate-x-0': menuOpen}">
     <div class="flex items-center justify-between px-4 py-5">
-      <img src="assets/neurolead-logo.svg" alt="Logo NeuroLead" class="h-8 w-auto" />
+      <img src="/icone.png" alt="Logo NeuroLead" class="h-8 w-auto" />
       <button aria-label="Fechar menu" (click)="closeMenu()">
         <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

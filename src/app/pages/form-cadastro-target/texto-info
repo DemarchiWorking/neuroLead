@@ -1,0 +1,44 @@
+Ótima pergunta, Stefaner! Um Frontend Sênior e estrategista de negócios pensaria na camada de apresentação como algo que entrega valor, clareza e decisão rápida ao consultor ou pré-vendedor.
+
+Vou te apresentar um cenário moderno e funcional de solução:
+
+🏆 1. VISÃO GERAL — OBJETIVO
+Exibir rapidamente, de forma visual e interativa, a lista dos potenciais pré-clientes mais estratégicos, facilitando o acompanhamento e priorização semanais.
+O consultor deve perceber oportunidades, riscos e potenciais à primeira vista.
+
+🧑‍💻 2. LAYOUT ESTRATÉGICO
+Sugestão: Dashboard interativo + visualização de lista tipo “pipeline”, enriquecido de indicadores visuais
+
+A. Dashboard Resumido/topo (KPIs)
+Total de empresas do funil da semana.
+Soma total de lucro/potencial estimado.
+Lucro médio por empresa.
+Score médio das leads/pre-vendas.
+Filtros rápidos: por setor, score, porte, multinacional (chips, toggles).
+B. Lista Prioritária/Seleção de Pré-vendas
+Apresentaria em tabela aprimorada👀 (table-board) ou como “cards compactos” (tipo Kanban ou listagem rica com indicadores):
+
+| (Foto) | Nome | Score | Avaliação | Score (visual) | Porte | Setor | Funcionários | Faturamento Anual | Lucro | Multinacional | Filiais | Idade | ...token/meta |
+
+Dicas FRONT para “visual inteligente”:
+
+Score/Avaliação: usar barra ou tag colorida (bg-green-500 para alto, bg-red-500 para baixo).
+Lucro/Faturamento: badge ou “number highlight”.
+Multinacional: ícone país ou globo 🌍.
+Porte: tag visual (Pequeno, Médio, Grande — cores diferenciadas).
+Mini gráfico (ex: de score ou de tendência) ao lado do nome (usando sparklines).
+Foto: avatar circular.
+Meta Dados: tooltip ou popover detalhado ao passar mouse/clicar (sem poluir visual imediato).
+Cards lado a lado (modo mobile/tablet):
+Foto | Nome (+ score em bolha) | KPIs resumidos na linha de baixo (lucro, funcionários, faturamento).
+Tag/Badge com o setor.
+Botão para visualizar perfil completo ou avançar no funil.
+C. “Painel Semanal”
+Se a ideia é mostrar a “seleção semanal”:
+
+Campo/filtro por “semana” (picker de datas).
+Marcar/mostrar as empresas selecionadas da semana, caso estejam em mais de uma semana.
+🚦 3. INTERAÇÕES E DESTACAR OPORTUNIDADES
+Destaque automático: As TOP 3 empresas (maior lucro+score), destaque visual (badge/trofeu/cor de fundo).
+Ações rápidas: Botões “Agendar call”, “Marcar interesse”, “Transferir para vendedor”, “Ver ficha”.
+Flags: Avisos de dados desatualizados (“i” ou “!” amarelo), ou se está em negociação anterior.
