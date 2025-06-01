@@ -9,6 +9,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js'; // ADICIONE
 import { v4 as uuidv4 } from 'uuid';
+import { CarouselDetalhesComponent } from '../../components/carousel-detalhes/carousel-detalhes.component';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-dados',
-  imports: [HttpClientModule, FormsModule, CommonModule, BaseChartDirective], // INCLUA NgChartsModule aqui
+  imports: [HttpClientModule, FormsModule, CommonModule, BaseChartDirective, CarouselDetalhesComponent], // INCLUA NgChartsModule aqui
   standalone: true,
   templateUrl: './dados.component.html',
   styleUrl: './dados.component.scss'
