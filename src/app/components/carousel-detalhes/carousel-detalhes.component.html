@@ -1,18 +1,134 @@
+<ng-container *ngIf="empresaAtual; else selecione">
+
+  <!-- outros campos necessários -->
+</ng-container>
+<ng-template #selecione>
+  <p>Selecione uma empresa na tabela</p>
+</ng-template>
+
+<!-- ACCORDION INTEGRADO, PRONTO PRA USAR -->
+<!-- comeca aq -->
 <div class="relative w-full  mx-auto overflow-hidden">
     <!-- Imagens -->
     <div class="flex transition-transform duration-500 ease-in-out" [ngStyle]="{ transform: 'translateX(-' + currentIndex * 100 + '%)' }">
-      <div *ngFor="let img of images" class="w-full flex-shrink-0">
-        
-        test
-         <!-- <img [src]="img" alt="Imagem do carrossel" >  class="w-full h-auto rounded-lg shadow-lg" /-->
+      <div *ngFor="let img of images" class="w-full flex-shrink-0">                  
+        <section class="mx-auto my-8 pl-10 pr-10">
+    <div 
+    class="group flex items-center rounded-xl border border-neutral-300 shadow-sm bg-white transition hover:shadow-md cursor-pointer px-7 py-6 select-none"
+    (click)="accordionExpanded = !accordionExpanded"
+    [attr.aria-expanded]="accordionExpanded"
+    [class.expanded]="accordionExpanded"
+  >
+    <div class="flex-1 text-lg font-semibold tracking-tight text-neutral-800">
+       <h2>{{ empresaAtual?.nome }}</h2>
+    </div>
+    <div>
+     <span class="text-xs text-gray-400 text-center leading-tight">
+       Setor: {{ empresaAtual?.setor }}   
+      </span>
+    </div>
+    <div class="ml-4 flex items-center">
+      <svg class="transition-transform duration-300" [ngStyle]="{transform: accordionExpanded ? 'rotate(180deg)' : 'rotate(0)'}"
+        xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#666" stroke-width="2.2">
+        <polyline points="7 12 14 19 21 12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+  <div
+    *ngIf="accordionExpanded"
+    class="accordion-content overflow-hidden bg-neutral-50 border border-t-0 border-neutral-200 rounded-b-xl px-8 pt-5 pb-6 shadow-inner fadein"
+  >
+      <div class="bg-white">
+          <div class="pt-6">
+          <!-- Image gallery -->
+              <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+                  <div>
+                     <p>Funcionários: {{ empresaAtual?.funcionarios }}</p>
+                      <p>Setor: {{ empresaAtual?.setor }}</p>
+<br><br>
+                                  
+                          <div class="space-y-6">
+                            <p class="text-base text-gray-900">
+                              {{ descricao }}
+                             <button (click)="this.pedirCamposIA()"  class="w-full bg-blue-600 text-white font-semibold rounded-[8px] py-2 text-base hover:bg-green-600 transition">
+                                Descrição Empresa
+                            </button>
+          </p>
+        <app-tabs></app-tabs>
+                  </div> 
+            </div>  
+            
+            <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+                              
+             <app-grafo-solucoes></app-grafo-solucoes>
+                                </div>
+                                      <div class="group relative">
+                                              <!--  <h2>{{ empresaAtual?.nome }}</h2> -->
+                                        <app-card-empresa></app-card-empresa>
+            <!--
+              <img src="stff.png" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-2/1 lg:aspect-square">
+            -->
+            
+                                        <h3 class="mt-6 text-sm text-gray-500">
+              <a href="#">
+            <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"> 
+                ...
+            </h1>
+            <span class="absolute inset-0"></span>
+               ...
+              </a>
+            </h3>
+           
+          </div>
+                              </div>
+
+                              <!-- Product info -->
+                            
+                            </div>
+                          </div>
+      <div class="flex justify-end">
+        <button class="inline-flex items-center gap-1 px-6 py-2 font-medium bg-blue-600 hover:bg-blue-700 text-white text-base rounded-lg shadow-sm transition"
+          (click)="fecharAccordion($event)">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Fechar
+        </button>
       </div>
+    </div>
+  </section>
+        <!--
+          <img [src]="logoUrl" alt="Imagem do carrossel" class="w-full h-auto rounded-lg shadow-lg" /> 
+        -->
+      
+        </div>
     </div>
   
     <!-- Botões de Navegação -->
-    <button (click)="prevSlide()" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
+    <button (click)="prevSlide()" class="absolute left-2 cursor-pointer top-1/2 transform -translate-y-1/2 bg-blue-800 text-white p-2 rounded-full">
       ❮
     </button>
-    <button (click)="nextSlide()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
+    <button (click)="nextSlide()" class="absolute right-2 cursor-pointer top-1/2 transform -translate-y-1/2 bg-blue-800 text-white p-2 rounded-full">
       ❯
     </button>
   </div>
+<!-- termina aq-->
+<br>
+
+
+  <div class="flex items-center space-x-4">
+  <label class="font-bold" for="domain-input">Empresa ou domínio:</label>
+  <input id="domain-input" type="text"
+         placeholder="ex: microsoft.com ou bancointer.com.br"
+         class="border px-3 rounded h-10">
+test
+
+  <button (click)="atualizarLogo()"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+  </button>test
+          <img *ngIf="logoUrl"
+       class="h-10 w-auto bg-white border rounded shadow"
+       [src]="logoUrl"
+       (error)="onLogoErro()" />
+</div>
+<span *ngIf="erro" class="text-red-500 text-sm">Logo não encontrada ou domínio inválido.</span>

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { v4 as uuidv4 } from 'uuid';
 import { firstValueFrom } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-form-cadastro-target',
@@ -16,13 +17,20 @@ import { firstValueFrom } from 'rxjs';
     trigger('formStep', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateX(40px)' }),
-        animate('350ms cubic-bezier(0.23, 1, 0.32, 1)', style({ opacity: 1, transform: 'translateX(0)' }))
+        animate(
+          '350ms cubic-bezier(0.23, 1, 0.32, 1)',
+          style({ opacity: 1, transform: 'translateX(0)' })
+        )
       ]),
       transition(':leave', [
-        animate('220ms', style({ opacity: 0, transform: 'translateX(-24px)' }))
+        animate(
+          '220ms',
+          style({ opacity: 0, transform: 'translateX(-24px)' })
+        )
       ])
     ])
-  ]
+  ] // Está correto!
+  // NÃO precisa de schemas: [CUSTOM_ELEMENTS_SCHEMA]!
 })
 export class FormCadastroTargetComponent {
   filtros = [
@@ -114,6 +122,7 @@ async pedirCamposIA() {
 }
 /*
 async pedirCamposIA(){console.log("t")}*/
+
 async avancar() {
   if (this.stepAtual === 0) {
     this.nomeSalvoStep1 = this.nomeApontado;

@@ -1,18 +1,16 @@
-
-<div
-  class="w-full flex justify-center items-center py-6"
->
+<!-- <div class="w-full flex justify-center items-center py-6">
   <div class="bg-white shadow-lg rounded-xl p-6 max-w-sm w-full">
-    <h3 class="text-lg font-semibold text-center mb-4 text-sky-700">Radar de Soluções para o Cliente</h3>
-    <canvas
-      baseChart
-      [type]="'radar'"
-      [data]="radarChartData"
-      [options]="radarChartOptions"
-      class="mx-auto"
-      width="300"
-      height="300"
-      style="max-width:300px; max-height:300px;"
-    ></canvas>
+    <div *ngIf="isBrowser">
+      <canvas
+        baseChart
+        [type]="'radar'"
+        [data]="radarChartData"
+        [options]="radarChartOptions"
+        class="mx-auto"
+        width="300"
+        height="300"
+        style="max-width:300px; max-height:300px;"
+      ></canvas>
+    </div>
   </div>
-</div>
+</div> -->

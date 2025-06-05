@@ -1,0 +1,42 @@
+<div class="">
+  <div class="w-full max-w-2xl shadow-lg rounded-md bg-white p-4">
+    <!-- Tab superior -->
+    <div class="flex border-b border-gray-300">
+      <ng-container *ngFor="let tab of mainTabs; let i = index">
+        <button
+          class="py-2 px-4 cursor-pointer text-sm font-medium transition-colors duration-100
+            border-b-2 hover:border-blue-400 focus:outline-none
+            border-transparent"
+          [ngClass]="mainTabIndex === i ? 'border-blue-600 text-blue-700 bg-blue-50' : 'text-gray-600 hover:bg-gray-50'"
+          (click)="selectMainTab(i)">
+          {{ tab.label }}
+        </button>
+      </ng-container>
+    </div>
+
+    <!-- Tab inferior -->
+    <div class="flex border-b border-gray-200 mt-2">
+      <ng-container *ngFor="let character of activeCharacters; let j = index">
+        <button
+          class="py-2 px-4 cursor-pointer text-sm transition-colors duration-100 border-b-2 focus:outline-none border-transparent"
+          [ngClass]="subTabIndex === j ? 'border-blue-500 text-blue-600 bg-blue-50' : 'text-gray-500 hover:bg-gray-100'"
+          (click)="selectSubTab(j)">
+          {{ character.name }}
+        </button>
+      </ng-container>
+    </div>
+
+    <!-- Conteúdo dinâmico -->
+    <div class="mt-8 flex items-start">
+      <img
+        class="h-56 w-auto rounded-lg shadow border-2 border-gray-200 mr-8"
+        [src]="activeCharacter.image"
+        [alt]="activeCharacter.name"
+      />
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ activeCharacter.name }}</h2>
+        <p class="text-gray-700">{{ activeCharacter.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

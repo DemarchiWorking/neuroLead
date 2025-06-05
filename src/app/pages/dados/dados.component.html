@@ -26,8 +26,9 @@
     <tbody class="bg-white divide-y divide-gray-200">
       <tr 
         *ngFor="let lead of leads; let i = index"
+        (click)="selecionarEmpresa(lead)" 
         [class.bg-gray-50]="i % 2 === 0"
-        class="hover:bg-blue-50 transition-colors duration-200"
+        class="hover:bg-blue-50 cursor-pointer transition-colors duration-200"
       >
         <td class="pl-5">
           <img class="size-12 flex-none rounded-full bg-gray-50" [src]="lead.foto || 'https://cdn-icons-png.flaticon.com/512/813/813789.png'" alt="">
@@ -182,6 +183,7 @@
 
 
 <!-- GRÁFICO - COMPARATIVO EMPRESAS -->
+ <!--
 <div class="w-full max-w-4xl mx-auto mt-10 mb-10 bg-white rounded-xl shadow">
   <canvas
     baseChart
@@ -189,4 +191,4 @@
     [options]="barChartOptions"
     chartType="bar">
   </canvas>
-</div>
+</div>-->

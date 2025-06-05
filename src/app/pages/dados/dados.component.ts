@@ -6,32 +6,41 @@ import { Observable } from 'rxjs';
 import { LeadService } from '../../services/lead.service';
 import { CommonModule } from '@angular/common'; //NgFor, NgIf
 import { FormsModule, NgModel } from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartData, ChartOptions } from 'chart.js'; // ADICIONE
+//import { BaseChartDirective } from 'ng2-charts';
+//import { ChartData, ChartOptions } from 'chart.js'; // ADICIONE
 import { v4 as uuidv4 } from 'uuid';
 import { CarouselDetalhesComponent } from '../../components/carousel-detalhes/carousel-detalhes.component';
-
+import { TargetEmpresaService } from '../../services/target/target-empresa.service';
 @Injectable({
   providedIn: 'root',
 })
 
 @Component({
   selector: 'app-dados',
-  imports: [HttpClientModule, FormsModule, CommonModule, BaseChartDirective, CarouselDetalhesComponent], // INCLUA NgChartsModule aqui
+  imports: [HttpClientModule, FormsModule, CommonModule, 
+    //BaseChartDirective,
+    CarouselDetalhesComponent], // INCLUA NgChartsModule aqui
   standalone: true,
   templateUrl: './dados.component.html',
   styleUrl: './dados.component.scss'
 })
 export class DadosComponent {
+
+
+
 // Troque a URL abaixo se seu Node estiver em outro endereço/porta ou hostname
-  private apiUrl = 'http://localhost:3001/api/leads';
+ private apiUrl = 'http://localhost:3001/api/leads';
  modalAberto = false;
   leadSelecionado: any = {};
-  constructor(private http: HttpClient,private leadService: LeadService) {}
+  constructor(
+    private http: HttpClient,
+    private leadService: LeadService,
+    private targetEmpresaService: TargetEmpresaService 
+  ) {}
   leads: any[] = [];
   carregando = true;
   novoLead : any = {
-    empresa_plataforma_setor_tipo_data: uuidv4(), // Adicione este campo com o valor vindo do usuário
+    empresa_plataforma_setor_tipo_data: uuidv4(), 
     token: '',
     leadId: '',
     Nome: '',
@@ -44,7 +53,7 @@ export class DadosComponent {
   ngOnInit() {
     this.buscarLeads();
   }
-
+/*
 public barChartData: ChartData<'bar'> = { labels: [], datasets: [] };
   public barChartOptions: ChartOptions<'bar'> = {
     responsive: true,
@@ -58,7 +67,11 @@ public barChartData: ChartData<'bar'> = { labels: [], datasets: [] };
         text: 'Comparativo Empresas'
       }
     }
-  };
+  };*/
+  selecionarEmpresa(empresa: any) {
+  this.targetEmpresaService.selecionarEmpresa(empresa);
+  }
+
   getLeads(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
@@ -98,6 +111,7 @@ public barChartData: ChartData<'bar'> = { labels: [], datasets: [] };
     });
   }
   montarGrafico() {
+    /*
     this.barChartData = {
       labels: this.leads.map(lead => lead.nome || lead.Nome || lead.leadId || '—'),
       datasets: [
@@ -118,7 +132,7 @@ public barChartData: ChartData<'bar'> = { labels: [], datasets: [] };
           label: 'Faturamento (R$)'
         }
       ]
-    };
+    };*/
   }
    abrirModalEditar(lead: any) {
     this.leadSelecionado = { ...lead }; // Cópia para edição sem mexer no original

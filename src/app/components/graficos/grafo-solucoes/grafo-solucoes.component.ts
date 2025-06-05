@@ -1,24 +1,37 @@
-import { Component } from '@angular/core';
-import { ChartOptions } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, RadialLinearScale } from 'chart.js';
-import 'chart.js/auto'; // Importação importante para registrar todos os componentes
-
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common'; // Adicione isso
+//import { ChartConfiguration } from 'chart.js';
+//import { BaseChartDirective } from 'ng2-charts';
+//import { Chart, ChartConfiguration, RadialLinearScale } from 'chart.js';
+//import { registerables } from 'chart.js';
+//import { ChartsModule } from 'ng2-charts';
+// ...
+//imports: [CommonModule, ]
+// Registrar os componentes necessários do Chart.js
+//Chart.register(...registerables, RadialLinearScale);
 @Component({
   selector: 'app-grafo-solucoes',
   standalone: true,
-  imports: [BaseChartDirective],
+  imports: [CommonModule],//, //NgChartsModule], // BaseChartDirective,Adicione CommonModule
   templateUrl: './grafo-solucoes.component.html',
   styleUrl: './grafo-solucoes.component.scss'
 })
 export class GrafoSolucoesComponent {
+  /*
+   public isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
   // Configuração do tipo radar
   public radarChartOptions: ChartConfiguration<'radar'>['options'] = {
     responsive: true,
     plugins: {
       legend: { 
         position: 'top', 
-        labels: { color: "#222" } 
+        labels: { color: '#222' } 
       },
       title: { display: false }
     },
@@ -31,7 +44,10 @@ export class GrafoSolucoesComponent {
         grid: { color: '#CFCFCF' },
         angleLines: { color: '#CFCFCF' },
         min: 0,
-        max: 100
+        max: 100,
+        ticks: {
+          stepSize: 20
+        }
       }
     }
   };
@@ -60,5 +76,5 @@ export class GrafoSolucoesComponent {
         pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
       }
     ]
-  };
+  };*/
 }
